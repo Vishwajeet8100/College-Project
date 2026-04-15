@@ -1,0 +1,5 @@
+requests
+urllib3
+grequests
+numpy
+boto3
