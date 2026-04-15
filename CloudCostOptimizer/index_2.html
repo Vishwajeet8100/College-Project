@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Cloud Cost Optimizer</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Fraunces:opsz,wght@9..144,300;9..144,600&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --ink: #1a1612;
+  --ink2: #4a4540;
+  --ink3: #8a857e;
+  --paper: #faf8f4;
+  --paper2: #f3f0ea;
+  --paper3: #e8e3da;
+  --rule: #ddd8ce;
+  --aws: #b45309;
+  --aws-bg: #fffbeb;
+  --aws-br: #fcd34d;
+  --azure: #1d4ed8;
+  --azure-bg: #eff6ff;
+  --azure-br: #93c5fd;
+  --green: #15803d;
+  --green-bg: #f0fdf4;
+  --red: #b91c1c;
+  --red-bg: #fef2f2;
+  --accent: #6d28d9;
+  --sans: 'DM Sans', system-ui, sans-serif;
+  --serif: 'Fraunces', Georgia, serif;
+  --mono: 'IBM Plex Mono', monospace;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: 14px; line-height: 1.6; min-height: 100vh; }
+.page { max-width: 1080px; margin: 0 auto; padding: 0 24px 80px; }
+
+/* Header */
+.hdr { border-bottom: 2px solid var(--ink); padding: 28px 0 18px; margin-bottom: 32px; display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+.hdr h1 { font-family: var(--serif); font-size: 26px; font-weight: 600; letter-spacing: -.5px; }
+.hdr p { font-size: 12px; color: var(--ink3); font-family: var(--mono); margin-top: 3px; }
+.apipill { display: flex; align-items: center; gap: 6px; border: 1px solid var(--rule); border-radius: 4px; padding: 5px 12px; font-family: var(--mono); font-size: 11px; color: var(--ink3); background: var(--paper2); }
+.apidot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); animation: blink 2s ease infinite; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:.3} }
+
+/* Tabs */
+.tabs { display: flex; border-bottom: 1.5px solid var(--rule); margin-bottom: 28px; }
+.tab { padding: 9px 18px; border: none; background: none; font-family: var(--sans); font-size: 13px; font-weight: 500; color: var(--ink3); cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -1.5px; transition: color .15s; }
+.tab:hover { color: var(--ink); }
+.tab.active { color: var(--ink); border-bottom-color: var(--ink); font-weight: 600; }
+.tabp { display: none; }
+.tabp.active { display: block; }
+
+/* Eyebrow */
+.eyebrow { font-family: var(--mono); font-size: 10px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--ink3); margin-bottom: 10px; }
+
+/* Form block */
+.fblock { background: var(--paper2); border: 1px solid var(--rule); border-radius: 6px; padding: 18px; margin-bottom: 16px; }
+.fgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(175px, 1fr)); gap: 12px; }
+.field { display: flex; flex-direction: column; gap: 4px; }
+.field label { font-size: 10px; font-weight: 600; color: var(--ink2); text-transform: uppercase; letter-spacing: .07em; font-family: var(--mono); }
+.field input, .field select { background: var(--paper); border: 1px solid var(--rule); border-radius: 4px; padding: 7px 9px; font-family: var(--sans); font-size: 13px; color: var(--ink); outline: none; transition: border-color .15s; width: 100%; }
+.field input:focus, .field select:focus { border-color: var(--ink2); }
+
+/* App/comp cards */
+.appblock { border: 1px solid var(--rule); border-radius: 6px; overflow: hidden; margin-bottom: 12px; background: var(--paper); }
+.apptop { display: flex; align-items: center; justify-content: space-between; padding: 9px 14px; background: var(--paper2); border-bottom: 1px solid var(--rule); gap: 10px; flex-wrap: wrap; }
+.appname { background: none; border: none; font-family: var(--serif); font-size: 14px; font-weight: 600; color: var(--ink); outline: none; min-width: 100px; }
+.appctrl { display: flex; align-items: center; gap: 12px; }
+.tog { display: flex; align-items: center; gap: 5px; font-size: 12px; color: var(--ink3); cursor: pointer; }
+.tog input { accent-color: var(--ink); width: 12px; height: 12px; }
+.appbody { padding: 12px 14px; }
+.complist { display: flex; flex-direction: column; gap: 8px; }
+.compblock { background: var(--paper2); border: 1px solid var(--rule); border-radius: 4px; padding: 10px 12px; }
+.comptop { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+.compname { background: none; border: none; font-family: var(--mono); font-size: 11px; font-weight: 600; color: var(--accent); outline: none; min-width: 90px; }
+.cgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(115px, 1fr)); gap: 8px; }
+.cgrid .field input, .cgrid .field select { padding: 5px 7px; font-size: 12px; }
+
+/* Buttons */
+.btn { display: inline-flex; align-items: center; gap: 5px; padding: 8px 16px; border-radius: 4px; border: 1px solid var(--ink); background: var(--ink); color: var(--paper); font-family: var(--sans); font-size: 13px; font-weight: 600; cursor: pointer; transition: opacity .15s; }
+.btn:hover { opacity: .82; }
+.btn-out { background: none; color: var(--ink); }
+.btn-out:hover { background: var(--paper2); opacity: 1; }
+.btn-ghost { background: none; border: 1px dashed var(--rule); color: var(--ink3); width: 100%; justify-content: center; font-weight: 500; margin-top: 6px; }
+.btn-ghost:hover { border-color: var(--ink3); color: var(--ink2); opacity: 1; }
+.btn-sm { padding: 4px 9px; font-size: 11px; }
+.btn-del { background: none; border-color: var(--rule); color: var(--ink3); padding: 3px 7px; font-size: 11px; }
+.btn-del:hover { border-color: var(--red); color: var(--red); opacity: 1; }
+.row { display: flex; align-items: center; gap: 10px; margin-top: 18px; flex-wrap: wrap; }
+
+/* Loader / error */
+.ldr { display: none; align-items: center; gap: 7px; font-family: var(--mono); font-size: 11px; color: var(--ink3); }
+.ldr.on { display: flex; }
+.spin { width: 13px; height: 13px; border: 1.5px solid var(--rule); border-top-color: var(--ink2); border-radius: 50%; animation: spin .7s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.err { display: none; background: var(--red-bg); border: 1px solid #fca5a5; border-radius: 4px; padding: 9px 12px; color: var(--red); font-family: var(--mono); font-size: 11px; margin-top: 12px; }
+.err.on { display: block; }
+
+/* Results */
+.resbar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; padding-bottom: 9px; border-bottom: 1px solid var(--rule); }
+.resbar h2 { font-family: var(--serif); font-size: 17px; font-weight: 600; }
+.countpill { font-family: var(--mono); font-size: 11px; background: var(--paper3); border: 1px solid var(--rule); border-radius: 20px; padding: 2px 9px; color: var(--ink2); }
+.rcard { border: 1px solid var(--rule); border-radius: 6px; margin-bottom: 8px; background: var(--paper); overflow: hidden; }
+.rcard.best { border-color: var(--green); }
+.rtop { display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; cursor: pointer; gap: 10px; flex-wrap: wrap; }
+.rleft { display: flex; align-items: center; gap: 12px; }
+.rankn { font-family: var(--mono); font-size: 11px; color: var(--ink3); min-width: 22px; }
+.rinfo h3 { font-size: 13px; font-weight: 600; }
+.rinfo p { font-size: 11px; color: var(--ink3); font-family: var(--mono); }
+.rright { display: flex; align-items: center; gap: 14px; }
+.pblock .ph { font-family: var(--mono); font-size: 17px; font-weight: 600; }
+.pblock .pm { font-family: var(--mono); font-size: 10px; color: var(--ink3); }
+.bestbadge { background: var(--green-bg); border: 1px solid #86efac; color: var(--green); border-radius: 3px; padding: 2px 7px; font-size: 9px; font-family: var(--mono); font-weight: 600; letter-spacing: .05em; text-transform: uppercase; }
+.chev { color: var(--ink3); font-size: 11px; transition: transform .2s; }
+.rcard.open .chev { transform: rotate(180deg); }
+.rbody { display: none; border-top: 1px solid var(--rule); padding: 16px; background: var(--paper2); }
+.rcard.open .rbody { display: block; }
+.igrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 10px; }
+.icard { background: var(--paper); border: 1px solid var(--rule); border-radius: 5px; padding: 12px; }
+.ihead { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 9px; }
+.iname { font-family: var(--mono); font-size: 12px; font-weight: 600; }
+.iprice { font-family: var(--mono); font-size: 12px; font-weight: 600; color: var(--green); }
+.ispecs { display: grid; grid-template-columns: 1fr 1fr; gap: 5px 10px; margin-bottom: 9px; }
+.sk { font-size: 9px; text-transform: uppercase; letter-spacing: .07em; color: var(--ink3); font-family: var(--mono); }
+.sv { font-size: 11px; font-family: var(--mono); }
+.chips { display: flex; flex-wrap: wrap; gap: 4px; }
+.chip { background: var(--paper2); border: 1px solid var(--rule); border-radius: 3px; padding: 1px 6px; font-size: 10px; font-family: var(--mono); color: var(--ink2); }
+.ftag { display: inline-block; font-size: 9px; font-family: var(--mono); padding: 2px 5px; border-radius: 3px; }
+.flow { background: var(--green-bg); color: var(--green); border: 1px solid #86efac; }
+.fmid { background: #fffbeb; color: #92400e; border: 1px solid #fcd34d; }
+.fhi  { background: var(--red-bg); color: var(--red); border: 1px solid #fca5a5; }
+
+/* Table */
+.dtbl { width: 100%; border-collapse: collapse; font-size: 12px; font-family: var(--mono); }
+.dtbl th { text-align: left; padding: 7px 11px; font-size: 9px; text-transform: uppercase; letter-spacing: .07em; color: var(--ink3); border-bottom: 1.5px solid var(--rule); background: var(--paper2); }
+.dtbl td { padding: 9px 11px; border-bottom: 1px solid var(--rule); color: var(--ink); }
+.dtbl tr:last-child td { border-bottom: none; }
+.dtbl tr:hover td { background: var(--paper2); }
+.tblwrap { border: 1px solid var(--rule); border-radius: 6px; overflow: hidden; overflow-x: auto; }
+.sep { border: none; border-top: 1px solid var(--rule); margin: 24px 0; }
+
+/* Compare */
+.modetog { display: flex; border: 1px solid var(--rule); border-radius: 4px; overflow: hidden; width: fit-content; margin-bottom: 22px; }
+.mbtn { padding: 6px 16px; border: none; background: var(--paper); color: var(--ink3); font-family: var(--sans); font-size: 13px; font-weight: 500; cursor: pointer; border-right: 1px solid var(--rule); }
+.mbtn:last-child { border-right: none; }
+.mbtn.on { background: var(--ink); color: var(--paper); font-weight: 600; }
+.wstrip { border-radius: 5px; padding: 12px 16px; margin-bottom: 18px; display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+.wstrip.awsw { background: var(--aws-bg); border: 1px solid var(--aws-br); }
+.wstrip.azuw { background: var(--azure-bg); border: 1px solid var(--azure-br); }
+.wstrip.tie  { background: var(--paper2); border: 1px solid var(--rule); }
+.wname { font-family: var(--serif); font-size: 16px; font-weight: 600; }
+.awsw .wname { color: var(--aws); }
+.azuw .wname { color: var(--azure); }
+.wdetail { font-size: 12px; color: var(--ink2); font-family: var(--mono); }
+.provcols { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 4px; }
+@media(max-width:580px){ .provcols { grid-template-columns: 1fr; } }
+.pcard { border: 1px solid var(--rule); border-radius: 6px; overflow: hidden; background: var(--paper); }
+.pcard.pwinner { border-width: 1.5px; }
+.pcard.awwinner { border-color: var(--aws-br); }
+.pcard.azwinner { border-color: var(--azure-br); }
+.phead { display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; border-bottom: 1px solid var(--rule); }
+.phead.awsh { background: var(--aws-bg); }
+.phead.azuh { background: var(--azure-bg); }
+.plabel { font-family: var(--serif); font-size: 14px; font-weight: 600; }
+.awsh .plabel { color: var(--aws); }
+.azuh .plabel { color: var(--azure); }
+.chtag { font-family: var(--mono); font-size: 9px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; padding: 2px 7px; border-radius: 3px; }
+.awsh .chtag { background: var(--aws-bg); color: var(--aws); border: 1px solid var(--aws-br); }
+.azuh .chtag { background: var(--azure-bg); color: var(--azure); border: 1px solid var(--azure-br); }
+.pprice { padding: 14px; border-bottom: 1px solid var(--rule); }
+.pplbl { font-size: 9px; text-transform: uppercase; letter-spacing: .07em; color: var(--ink3); font-family: var(--mono); margin-bottom: 3px; }
+.ppval { font-family: var(--mono); font-size: 24px; font-weight: 600; }
+.ppmo  { font-family: var(--mono); font-size: 10px; color: var(--ink3); margin-top: 1px; }
+.plist { padding: 10px 14px; }
+.pltitle { font-size: 9px; text-transform: uppercase; letter-spacing: .07em; color: var(--ink3); font-family: var(--mono); margin-bottom: 7px; }
+.prow { display: flex; justify-content: space-between; padding: 5px 0; border-bottom: 1px solid var(--rule); font-family: var(--mono); font-size: 11px; }
+.prow:last-child { border-bottom: none; }
+.prow.ptop .prp { color: var(--green); font-weight: 600; }
+.prl { color: var(--ink2); } .prp { color: var(--ink3); }
+.pfooter { padding: 7px 14px; background: var(--paper2); font-family: var(--mono); font-size: 10px; color: var(--ink3); border-top: 1px solid var(--rule); }
+.cwcell { background: #f0fdf4; }
+.wbadge { font-family: var(--mono); font-size: 9px; font-weight: 600; padding: 2px 6px; border-radius: 3px; text-transform: uppercase; }
+.wbadge.aws { background: var(--aws-bg); color: var(--aws); border: 1px solid var(--aws-br); }
+.wbadge.azure { background: var(--azure-bg); color: var(--azure); border: 1px solid var(--azure-br); }
+@media(max-width:580px){ .fgrid,.cgrid { grid-template-columns: 1fr 1fr; } }
+</style>
+</head>
+<body>
+<div class="page">
+
+<header class="hdr">
+  <div>
+    <h1>Cloud Cost Optimizer</h1>
+    <p>Multi-cloud deployment cost analysis · AWS &amp; Azure</p>
+  </div>
+  <div class="apipill"><div class="apidot"></div>localhost:5000</div>
+</header>
+
+<div class="tabs">
+  <button class="tab active" onclick="switchTab('fleet',this)">Fleet search</button>
+  <button class="tab" onclick="switchTab('single',this)">Single instance</button>
+  <button class="tab" onclick="switchTab('compare',this)">AWS vs Azure</button>
+</div>
+
+<!-- FLEET -->
+<div id="tab-fleet" class="tabp active">
+  <div class="eyebrow">Configuration</div>
+  <div class="fblock">
+    <div class="fgrid">
+      <div class="field"><label>Provider</label>
+        <select id="fl-prov"><option value="AWS">AWS</option><option value="Azure">Azure</option><option value="Hybrid">Hybrid</option></select></div>
+      <div class="field"><label>OS</label>
+        <select id="fl-os"><option value="linux">Linux</option><option value="windows">Windows</option></select></div>
+      <div class="field"><label>Pricing</label>
+        <select id="fl-pay"><option value="Spot">Spot</option><option value="OnDemand">On-Demand</option></select></div>
+      <div class="field"><label>Region</label><input type="text" id="fl-reg" value="all" placeholder="us-east-1 or all"/></div>
+      <div class="field"><label>Architecture</label>
+        <select id="fl-arch"><option value="all">All</option><option value="x86_64">x86_64</option><option value="arm64">arm64</option><option value="i386">i386</option></select></div>
+      <div class="field"><label>Filter instances</label><input type="text" id="fl-flt" placeholder="e.g. a1, t3a"/></div>
+    </div>
+  </div>
+  <div class="eyebrow">Applications</div>
+  <div id="fl-apps"></div>
+  <button class="btn btn-ghost" onclick="addApp()">+ Add application</button>
+  <div class="row">
+    <button class="btn" onclick="runFleet()">Run optimization</button>
+    <button class="btn btn-out" onclick="loadExample()">Load example</button>
+    <div class="ldr" id="fl-ldr"><div class="spin"></div><span>Searching regions…</span></div>
+  </div>
+  <div class="err" id="fl-err"></div>
+  <div id="fl-res" style="display:none">
+    <hr class="sep"/>
+    <div class="resbar"><h2>Deployment options</h2><span class="countpill" id="fl-cnt">0</span></div>
+    <div id="fl-list"></div>
+  </div>
+</div>
+
+<!-- SINGLE -->
+<div id="tab-single" class="tabp">
+  <div class="eyebrow">Requirements</div>
+  <div class="fblock">
+    <div class="fgrid">
+      <div class="field"><label>Provider</label>
+        <select id="si-prov"><option value="AWS">AWS</option><option value="Azure">Azure</option><option value="Hybrid">Hybrid</option></select></div>
+      <div class="field"><label>OS</label>
+        <select id="si-os"><option value="linux">Linux</option><option value="windows">Windows</option></select></div>
+      <div class="field"><label>Pricing</label>
+        <select id="si-pay"><option value="Spot">Spot</option><option value="OnDemand">On-Demand</option></select></div>
+      <div class="field"><label>Region</label><input type="text" id="si-reg" value="all"/></div>
+      <div class="field"><label>Min vCPUs</label><input type="number" id="si-cpu" value="2" min="1"/></div>
+      <div class="field"><label>Min memory (GB)</label><input type="number" id="si-mem" value="8" min="1"/></div>
+      <div class="field"><label>Network (Gbps)</label><input type="number" id="si-net" value="0" min="0"/></div>
+      <div class="field"><label>Storage (GB)</label><input type="number" id="si-stor" value="0" min="0"/></div>
+      <div class="field"><label>Instance type</label>
+        <select id="si-type"><option value="all">All</option><option value="General Purpose">General Purpose</option><option value="Compute Optimized">Compute Optimized</option><option value="Memory Optimized">Memory Optimized</option><option value="Storage Optimized">Storage Optimized</option><option value="GPU Instances">GPU Instances</option></select></div>
+      <div class="field"><label>Interruption</label>
+        <select id="si-beh"><option value="terminate">Terminate</option><option value="stop">Stop</option><option value="hibernate">Hibernate</option></select></div>
+      <div class="field"><label>Max frequency</label>
+        <select id="si-freq"><option value="0">&lt;5%</option><option value="1">5–10%</option><option value="2">10–15%</option><option value="3">15–20%</option><option value="4" selected>&gt;20%</option></select></div>
+    </div>
+  </div>
+  <div class="row">
+    <button class="btn" onclick="runSingle()">Find instances</button>
+    <div class="ldr" id="si-ldr"><div class="spin"></div></div>
+  </div>
+  <div class="err" id="si-err"></div>
+  <div id="si-res" style="display:none;margin-top:18px">
+    <hr class="sep"/>
+    <div class="eyebrow">Results</div>
+    <div class="tblwrap">
+      <table class="dtbl">
+        <thead><tr><th>#</th><th>Instance</th><th>Region</th><th>Family</th><th>vCPU</th><th>Memory</th><th>Network</th><th>Spot/hr</th><th>On-demand/hr</th><th>Interruption</th></tr></thead>
+        <tbody id="si-tbody"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- COMPARE -->
+<div id="tab-compare" class="tabp">
+  <div class="modetog">
+    <button class="mbtn on" id="cm-bf" onclick="setCmpMode('fleet')">Fleet</button>
+    <button class="mbtn" id="cm-bs" onclick="setCmpMode('single')">Single instance</button>
+  </div>
+  <input type="hidden" id="cm-mode" value="fleet"/>
+
+  <div id="cm-fleet">
+    <div class="eyebrow">Settings</div>
+    <div class="fblock">
+      <div class="fgrid">
+        <div class="field"><label>OS</label><select id="cm-os"><option value="linux">Linux</option><option value="windows">Windows</option></select></div>
+        <div class="field"><label>Pricing</label><select id="cm-pay"><option value="Spot">Spot</option><option value="OnDemand">On-Demand</option></select></div>
+      </div>
+    </div>
+    <div class="eyebrow">Applications</div>
+    <div id="cm-apps"></div>
+    <button class="btn btn-ghost" onclick="addCmpApp()">+ Add application</button>
+  </div>
+
+  <div id="cm-single" style="display:none">
+    <div class="eyebrow">Requirements</div>
+    <div class="fblock">
+      <div class="fgrid">
+        <div class="field"><label>OS</label><select id="cm-si-os"><option value="linux">Linux</option><option value="windows">Windows</option></select></div>
+        <div class="field"><label>Pricing</label><select id="cm-si-pay"><option value="Spot">Spot</option><option value="OnDemand">On-Demand</option></select></div>
+        <div class="field"><label>Min vCPUs</label><input type="number" id="cm-si-cpu" value="2" min="1"/></div>
+        <div class="field"><label>Min memory (GB)</label><input type="number" id="cm-si-mem" value="8" min="1"/></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <button class="btn" onclick="runCompare()">Compare AWS vs Azure</button>
+    <div class="ldr" id="cm-ldr"><div class="spin"></div><span>Querying both providers…</span></div>
+  </div>
+  <div class="err" id="cm-err"></div>
+
+  <div id="cm-res" style="display:none;margin-top:22px">
+    <div id="cm-winner"></div>
+    <div class="provcols"><div id="cm-aws"></div><div id="cm-azu"></div></div>
+    <div id="cm-tbl"></div>
+  </div>
+</div>
+
+</div>
+
+<script>
+const API = 'http://127.0.0.1:5000';
+let aid=0,cid=0,caid=0,ccid=0;
+
+function switchTab(n,btn){
+  document.querySelectorAll('.tabp').forEach(p=>{p.classList.remove('active');p.style.display='none';});
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  const p=document.getElementById('tab-'+n); p.classList.add('active'); p.style.display='block';
+  btn.classList.add('active');
+}
+
+/* Fleet */
+function addApp(nm,sh){
+  aid++; const id=aid;
+  const el=document.createElement('div'); el.className='appblock'; el.id='ap-'+id;
+  el.innerHTML=`<div class="apptop">
+    <input class="appname" id="an-${id}" value="${nm||'App'+id}"/>
+    <div class="appctrl">
+      <label class="tog"><input type="checkbox" id="ash-${id}" ${sh!==false?'checked':''}/> Share instances</label>
+      <button class="btn btn-del btn-sm" onclick="document.getElementById('ap-${id}').remove()">Remove</button>
+    </div></div>
+    <div class="appbody"><div class="complist" id="cl-${id}"></div>
+    <button class="btn btn-ghost btn-sm" style="margin-top:6px" onclick="addComp(${id})">+ Add component</button></div>`;
+  document.getElementById('fl-apps').appendChild(el); addComp(id);
+}
+
+function addComp(a,d){
+  cid++; const c=cid; d=d||{};
+  const el=document.createElement('div'); el.className='compblock'; el.id='cp-'+c;
+  el.innerHTML=`<div class="comptop">
+    <input class="compname" id="cn-${c}" value="${d.name||'Comp'+c}"/>
+    <button class="btn btn-del" onclick="document.getElementById('cp-${c}').remove()">×</button></div>
+    <div class="cgrid">
+      <div class="field"><label>vCPUs</label><input type="number" id="cv-${c}" value="${d.vCPUs||2}" min="1"/></div>
+      <div class="field"><label>Memory (GB)</label><input type="number" id="cm-${c}" value="${d.memory||8}" min="1"/></div>
+      <div class="field"><label>Network</label><input type="number" id="cnet-${c}" value="${d.network||0}" min="0"/></div>
+      <div class="field"><label>Behavior</label>
+        <select id="cb-${c}"><option value="terminate">Terminate</option><option value="stop">Stop</option><option value="hibernate">Hibernate</option></select></div>
+      <div class="field"><label>Frequency</label>
+        <select id="cf-${c}"><option value="0">&lt;5%</option><option value="1">5–10%</option><option value="2" selected>10–15%</option><option value="3">15–20%</option><option value="4">&gt;20%</option></select></div>
+      <div class="field"><label>Affinity</label><input type="text" id="caff-${c}" value="${d.affinity||''}" placeholder="optional"/></div>
+    </div>`;
+  document.getElementById('cl-'+a).appendChild(el);
+}
+
+function buildFP(osId,payId,appsContainerId){
+  const apps=[];
+  document.querySelectorAll('#'+(appsContainerId||'fl-apps')+' .appblock').forEach(el=>{
+    const id=el.id.replace('ap-','').replace('cap-','');
+    const comps=[];
+    el.querySelectorAll('.compblock').forEach(cel=>{
+      const c=cel.id.replace('cp-','').replace('ccp-','');
+      const aff=document.getElementById('caff-'+c)?.value.trim()||'';
+      const co={name:document.getElementById('cn-'+c).value, vCPUs:+document.getElementById('cv-'+c).value, memory:+document.getElementById('cm-'+c).value, network:+document.getElementById('cnet-'+c).value, behavior:document.getElementById('cb-'+c).value, frequency:document.getElementById('cf-'+c).value, storageType:null};
+      if(aff) co.affinity=aff; comps.push(co);
+    });
+    const anEl=document.getElementById('an-'+id)||document.getElementById('can-'+id);
+    const ashEl=document.getElementById('ash-'+id)||document.getElementById('cash-'+id);
+    apps.push({app:anEl.value, share:ashEl.checked, components:comps});
+  });
+  const r=document.getElementById('fl-reg')?.value.trim()||'all';
+  const f=document.getElementById('fl-flt')?.value.trim()||'';
+  const p={selectedOs:document.getElementById(osId||'fl-os').value, payment:document.getElementById(payId||'fl-pay').value, region:r==='all'?'all':r.split(',').map(x=>x.trim()), architecture:document.getElementById('fl-arch')?.value||'all', apps};
+  if(f) p.filterInstances=f.split(',').map(x=>x.trim());
+  return p;
+}
+
+async function runFleet(){
+  const prov=document.getElementById('fl-prov').value;
+  const ep={AWS:'/getAWSFleet',Azure:'/getAzureFleet',Hybrid:'/getHybridCloudFleet'}[prov];
+  show('fl-ldr'); hide('fl-err'); document.getElementById('fl-res').style.display='none';
+  try { const d=await post(API+ep,buildFP()); renderFleet(d); }
+  catch(e){ showErr('fl-err',e); } finally{ hide('fl-ldr'); }
+}
+
+function renderFleet(data){
+  const list=document.getElementById('fl-list'); list.innerHTML='';
+  document.getElementById('fl-cnt').textContent=data.length+' configuration'+(data.length===1?'':'s');
+  document.getElementById('fl-res').style.display='block';
+  if(!data.length){list.innerHTML='<p style="color:var(--ink3);font-family:var(--mono);font-size:12px;padding:8px 0">No configurations found.</p>';return;}
+  data.forEach((cfg,i)=>{
+    const best=i===0;
+    const el=document.createElement('div'); el.className='rcard'+(best?' best open':'');
+    el.innerHTML=`<div class="rtop" onclick="this.parentElement.classList.toggle('open')">
+      <div class="rleft"><span class="rankn">${String(i+1).padStart(2,'0')}</span>
+        <div class="rinfo"><h3>${cfg.instances.length} instance${cfg.instances.length>1?'s':''} · ${cfg['EC2 Type']||'spot'}</h3><p>${cfg.region}</p></div></div>
+      <div class="rright">${best?'<span class="bestbadge">Best</span>':''}
+        <div class="pblock"><div class="ph">$${cfg.price}<span style="font-size:11px;font-weight:400">/hr</span></div><div class="pm">~$${(cfg.price*730).toFixed(0)}/mo</div></div>
+        <span class="chev">▾</span></div></div>
+      <div class="rbody"><div class="igrid">${cfg.instances.map(renderInst).join('')}</div></div>`;
+    list.appendChild(el);
+  });
+}
+
+function renderInst(inst){
+  const fc=inst.interruption_frequency?.includes('<5')?'flow':inst.interruption_frequency?.includes('5%')?'fmid':'fhi';
+  const comps=(inst.components||[]).map(c=>`<span class="chip">${c.appName}/${c.componentName}</span>`).join('');
+  return `<div class="icard"><div class="ihead"><span class="iname">${inst.typeName}</span><span class="iprice">$${inst.spot_price}/hr</span></div>
+    <div class="ispecs">
+      <div><div class="sk">vCPU</div><div class="sv">${inst.cpu}</div></div>
+      <div><div class="sk">Memory</div><div class="sv">${inst.memory} GB</div></div>
+      <div><div class="sk">Network</div><div class="sv" style="font-size:10px">${inst.network}</div></div>
+      <div><div class="sk">On-demand</div><div class="sv" style="color:var(--ink3)">$${inst.onDemandPrice}/hr</div></div>
+      <div style="grid-column:span 2"><div class="sk">Interruption</div><span class="ftag ${fc}">${inst.interruption_frequency||'N/A'}</span></div>
+    </div><div class="chips">${comps}</div></div>`;
+}
+
+/* Single */
+async function runSingle(){
+  const prov=document.getElementById('si-prov').value;
+  const ep={AWS:'/getAWSPrices',Azure:'/getAzurePrices',Hybrid:'/getHybridPrices'}[prov];
+  show('si-ldr'); hide('si-err'); document.getElementById('si-res').style.display='none';
+  const p={selectedOs:document.getElementById('si-os').value, payment:document.getElementById('si-pay').value, selectedRegion:document.getElementById('si-reg').value, vCPUs:document.getElementById('si-cpu').value, memory:document.getElementById('si-mem').value, network:document.getElementById('si-net').value, size:document.getElementById('si-stor').value, type:document.getElementById('si-type').value, behavior:document.getElementById('si-beh').value, frequency:document.getElementById('si-freq').value, burstable:true, storageType:null, iops:null, throughput:null};
+  try { const d=await post(API+ep,p); renderSingle(d); }
+  catch(e){ showErr('si-err',e); } finally{ hide('si-ldr'); }
+}
+
+function renderSingle(data){
+  const tb=document.getElementById('si-tbody'); tb.innerHTML='';
+  document.getElementById('si-res').style.display='block';
+  const list=Array.isArray(data)?data:[];
+  if(!list.length){tb.innerHTML='<tr><td colspan="10" style="text-align:center;color:var(--ink3);padding:18px">No instances found.</td></tr>';return;}
+  list.forEach((inst,i)=>{
+    const fc=inst.interruption_frequency?.includes('<5')?'flow':inst.interruption_frequency?.includes('5%')?'fmid':'fhi';
+    const tr=document.createElement('tr');
+    tr.innerHTML=`<td style="color:var(--ink3)">${i+1}</td><td style="font-weight:600">${inst.typeName||'-'}</td><td>${inst.region||'-'}</td><td style="font-size:10px">${inst.family||'-'}</td><td>${inst.cpu||'-'}</td><td>${inst.memory||'-'} GB</td><td style="font-size:10px">${inst.network||'-'}</td><td style="color:var(--green);font-weight:600">$${inst.spot_price||'-'}</td><td style="color:var(--ink3)">$${inst.onDemandPrice||'-'}</td><td><span class="ftag ${fc}">${inst.interruption_frequency||'-'}</span></td>`;
+    tb.appendChild(tr);
+  });
+}
+
+/* Compare */
+function setCmpMode(m){
+  document.getElementById('cm-mode').value=m;
+  document.getElementById('cm-fleet').style.display=m==='fleet'?'block':'none';
+  document.getElementById('cm-single').style.display=m==='single'?'block':'none';
+  document.getElementById('cm-bf').classList.toggle('on',m==='fleet');
+  document.getElementById('cm-bs').classList.toggle('on',m==='single');
+  document.getElementById('cm-res').style.display='none';
+}
+
+function addCmpApp(nm,sh){
+  caid++; const id=caid;
+  const el=document.createElement('div'); el.className='appblock'; el.id='cap-'+id;
+  el.innerHTML=`<div class="apptop">
+    <input class="appname" id="can-${id}" value="${nm||'App'+id}"/>
+    <div class="appctrl">
+      <label class="tog"><input type="checkbox" id="cash-${id}" ${sh!==false?'checked':''}/> Share instances</label>
+      <button class="btn btn-del btn-sm" onclick="document.getElementById('cap-${id}').remove()">Remove</button>
+    </div></div>
+    <div class="appbody"><div class="complist" id="ccl-${id}"></div>
+    <button class="btn btn-ghost btn-sm" style="margin-top:6px" onclick="addCmpComp(${id})">+ Add component</button></div>`;
+  document.getElementById('cm-apps').appendChild(el); addCmpComp(id);
+}
+
+function addCmpComp(a){
+  ccid++; const c=ccid;
+  const el=document.createElement('div'); el.className='compblock'; el.id='ccp-'+c;
+  el.innerHTML=`<div class="comptop">
+    <input class="compname" id="cn-${c}" value="Comp${c}"/>
+    <button class="btn btn-del" onclick="document.getElementById('ccp-${c}').remove()">×</button></div>
+    <div class="cgrid">
+      <div class="field"><label>vCPUs</label><input type="number" id="cv-${c}" value="2" min="1"/></div>
+      <div class="field"><label>Memory (GB)</label><input type="number" id="cm-${c}" value="8" min="1"/></div>
+      <div class="field"><label>Network</label><input type="number" id="cnet-${c}" value="0" min="0"/></div>
+      <div class="field"><label>Behavior</label><select id="cb-${c}"><option value="terminate">Terminate</option><option value="stop">Stop</option><option value="hibernate">Hibernate</option></select></div>
+      <div class="field"><label>Frequency</label><select id="cf-${c}"><option value="0">&lt;5%</option><option value="1">5–10%</option><option value="2" selected>10–15%</option><option value="3">15–20%</option><option value="4">&gt;20%</option></select></div>
+    </div>`;
+  document.getElementById('ccl-'+a).appendChild(el);
+}
+
+function buildCmpFP(){
+  const apps=[];
+  document.querySelectorAll('#cm-apps .appblock').forEach(el=>{
+    const id=el.id.replace('cap-',''); const comps=[];
+    el.querySelectorAll('.compblock').forEach(cel=>{
+      const c=cel.id.replace('ccp-','');
+      comps.push({name:document.getElementById('cn-'+c).value, vCPUs:+document.getElementById('cv-'+c).value, memory:+document.getElementById('cm-'+c).value, network:+document.getElementById('cnet-'+c).value, behavior:document.getElementById('cb-'+c).value, frequency:document.getElementById('cf-'+c).value, storageType:null});
+    });
+    apps.push({app:document.getElementById('can-'+id).value, share:document.getElementById('cash-'+id).checked, components:comps});
+  });
+  return {selectedOs:document.getElementById('cm-os').value, payment:document.getElementById('cm-pay').value, region:'all', architecture:'all', apps};
+}
+
+async function runCompare(){
+  const mode=document.getElementById('cm-mode').value;
+  show('cm-ldr'); hide('cm-err'); document.getElementById('cm-res').style.display='none';
+  try {
+    let ap,zp;
+    if(mode==='fleet'){ ap=zp=buildCmpFP(); }
+    else { ap=zp={selectedOs:document.getElementById('cm-si-os').value, payment:document.getElementById('cm-si-pay').value, selectedRegion:'all', vCPUs:document.getElementById('cm-si-cpu').value, memory:document.getElementById('cm-si-mem').value, network:'0', size:'0', type:'all', behavior:'terminate', frequency:'4', burstable:true, storageType:null, iops:null, throughput:null}; }
+    const [ar,zr]=await Promise.all([post(API+(mode==='fleet'?'/getAWSFleet':'/getAWSPrices'),ap), post(API+(mode==='fleet'?'/getAzureFleet':'/getAzurePrices'),zp)]);
+    renderCmp(ar,zr,mode);
+  } catch(e){ showErr('cm-err',e); } finally{ hide('cm-ldr'); }
+}
+
+function getB(d,m){ if(!d||!d.length)return null; if(m==='fleet')return d[0].price; const x=Array.isArray(d)?d[0]:null; return x?(x.spot_price||x.onDemandPrice||null):null; }
+
+function renderCmp(awd,azd,mode){
+  document.getElementById('cm-res').style.display='block';
+  const ab=getB(awd,mode), zb=getB(azd,mode);
+  const w=(!ab&&!zb)?null:!zb?'aws':!ab?'azure':ab<=zb?'aws':'azure';
+  const diff=ab&&zb?Math.abs(ab-zb).toFixed(4):null;
+  const pct=ab&&zb?(Math.abs(ab-zb)/Math.max(ab,zb)*100).toFixed(1):null;
+  document.getElementById('cm-winner').innerHTML=w?`<div class="wstrip ${w==='aws'?'awsw':'azuw'}"><div class="wname">${w==='aws'?'AWS':'Azure'} is cheaper</div><div class="wdetail">by $${diff}/hr · ${pct}% less · saves ~$${(diff*730).toFixed(0)}/month</div></div>`:`<div class="wstrip tie"><span style="color:var(--ink3);font-family:var(--mono);font-size:12px">Check that both providers returned results.</span></div>`;
+  document.getElementById('cm-aws').innerHTML=makePC(awd,'AWS',ab,w==='aws',mode);
+  document.getElementById('cm-azu').innerHTML=makePC(azd,'Azure',zb,w==='azure',mode);
+  mode==='fleet'?renderFCT(awd,azd):renderSCT(awd,azd);
+}
+
+function makePC(data,name,best,isW,mode){
+  const isA=name==='AWS'; const hc=isA?'awsh':'azuh'; const wc=isW?(isA?'awwinner':'azwinner'):'';
+  if(!data||!data.length)return`<div class="pcard"><div class="phead ${hc}"><span class="plabel">${name}</span><span style="font-size:11px;color:var(--ink3);font-family:var(--mono)">No data</span></div></div>`;
+  const rows=data.slice(0,3).map((item,i)=>{const p=mode==='fleet'?item.price:(item.spot_price||item.onDemandPrice);const l=mode==='fleet'?item.region:item.typeName;return`<div class="prow ${i===0?'ptop':''}"><span class="prl">${l}</span><span class="prp">$${p}/hr</span></div>`;}).join('');
+  return`<div class="pcard ${isW?'pwinner':''} ${wc}"><div class="phead ${hc}"><span class="plabel">${name}</span>${isW?'<span class="chtag">Cheaper</span>':''}</div><div class="pprice"><div class="pplbl">Best price</div><div class="ppval">$${best}/hr</div><div class="ppmo">~$${(best*730).toFixed(0)}/month</div></div><div class="plist"><div class="pltitle">Top ${Math.min(data.length,3)} options</div>${rows}</div><div class="pfooter">${data.length} configurations found</div></div>`;
+}
+
+function renderFCT(ad,zd){
+  const rows=Array.from({length:Math.min(Math.max(ad?.length||0,zd?.length||0),10)},(_,i)=>{
+    const a=ad?.[i],z=zd?.[i],ap=a?.price,zp=z?.price;
+    const w=!ap&&!zp?null:!zp?'aws':!ap?'azure':ap<=zp?'aws':'azure';
+    return`<tr><td style="color:var(--ink3)">${i+1}</td><td class="${w==='aws'?'cwcell':''}">${a?'$'+a.price+'/hr':'—'}</td><td style="color:var(--ink3)">${a?a.region:'—'}</td><td class="${w==='azure'?'cwcell':''}">${z?'$'+z.price+'/hr':'—'}</td><td style="color:var(--ink3)">${z?z.region:'—'}</td><td>${w?`<span class="wbadge ${w}">${w.toUpperCase()}</span>`:'—'}</td></tr>`;
+  }).join('');
+  document.getElementById('cm-tbl').innerHTML=`<hr class="sep"/><div class="eyebrow">Side-by-side</div><div class="tblwrap"><table class="dtbl"><thead><tr><th>#</th><th style="color:var(--aws)">AWS price/hr</th><th style="color:var(--aws)">AWS region</th><th style="color:var(--azure)">Azure price/hr</th><th style="color:var(--azure)">Azure region</th><th>Winner</th></tr></thead><tbody>${rows}</tbody></table></div>`;
+}
+
+function renderSCT(ad,zd){
+  const aw=Array.isArray(ad)?ad:[],az=Array.isArray(zd)?zd:[];
+  const rows=Array.from({length:Math.min(Math.max(aw.length,az.length),10)},(_,i)=>{
+    const a=aw[i],z=az[i],ap=a?.spot_price||a?.onDemandPrice,zp=z?.spot_price||z?.onDemandPrice;
+    const w=!ap&&!zp?null:!zp?'aws':!ap?'azure':ap<=zp?'aws':'azure';
+    return`<tr><td style="color:var(--ink3)">${i+1}</td><td class="${w==='aws'?'cwcell':''}" style="font-weight:600">${a?.typeName||'—'}</td><td class="${w==='aws'?'cwcell':''}">${ap?'$'+ap+'/hr':'—'}</td><td class="${w==='azure'?'cwcell':''}" style="font-weight:600">${z?.typeName||'—'}</td><td class="${w==='azure'?'cwcell':''}">${zp?'$'+zp+'/hr':'—'}</td><td>${w?`<span class="wbadge ${w}">${w.toUpperCase()}</span>`:'—'}</td></tr>`;
+  }).join('');
+  document.getElementById('cm-tbl').innerHTML=`<hr class="sep"/><div class="eyebrow">Side-by-side</div><div class="tblwrap"><table class="dtbl"><thead><tr><th>#</th><th style="color:var(--aws)">AWS instance</th><th style="color:var(--aws)">AWS price/hr</th><th style="color:var(--azure)">Azure instance</th><th style="color:var(--azure)">Azure price/hr</th><th>Winner</th></tr></thead><tbody>${rows}</tbody></table></div>`;
+}
+
+function loadExample(){
+  document.getElementById('fl-apps').innerHTML=''; aid=0; cid=0;
+  addApp('WebApp',true); const a1=aid; addComp(a1,{name:'API Server',vCPUs:4,memory:8,behavior:'terminate',frequency:'2'});
+  addApp('Database',false); const a2=aid; addComp(a2,{name:'PostgreSQL',vCPUs:8,memory:32,behavior:'stop',frequency:'1'});
+}
+
+async function post(url,body){ const r=await fetch(url,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)}); if(!r.ok)throw new Error('Server error: '+r.status); return r.json(); }
+function show(id){ document.getElementById(id).classList.add('on'); }
+function hide(id){ document.getElementById(id).classList.remove('on'); }
+function showErr(id,e){ const el=document.getElementById(id); el.textContent=e.message.includes('fetch')?'Cannot connect. Make sure python app.py is running on port 5000.':e.message; el.classList.add('on'); }
+
+addApp('App1',true);
+addCmpApp('App1',true);
+</script>
+</body>
+</html>

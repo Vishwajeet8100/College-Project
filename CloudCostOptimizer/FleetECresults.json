@@ -1,0 +1,1050 @@
+[
+    {
+        "price": 0.0185,
+        "instances": [
+            {
+                "typeName": "D2a v4",
+                "cpu": 2,
+                "memory": 8,
+                "storage": 50,
+                "region": "Central India",
+                "os": "CentOS or Ubuntu Linux",
+                "family": "General purpose",
+                "onDemandPrice": 0.0622,
+                "spot_price": 0.0062,
+                "discount": 0,
+                "CloudProvider": "Azure",
+                "priceAfterDiscount": 0.0062,
+                "components": [
+                    {
+                        "appName": "App1",
+                        "componentName": "Comp1"
+                    }
+                ]
+            },
+            {
+                "typeName": "D4a v4",
+                "cpu": 4,
+                "memory": 16,
+                "storage": 100,
+                "region": "Central India",
+                "os": "CentOS or Ubuntu Linux",
+                "family": "General purpose",
+                "onDemandPrice": 0.123,
+                "spot_price": 0.0123,
+                "discount": 0,
+                "CloudProvider": "Azure",
+                "priceAfterDiscount": 0.0123,
+                "components": [
+                    {
+                        "appName": "Database",
+                        "componentName": "Comp2"
+                    },
+                    {
+                        "appName": "Database",
+                        "componentName": "Comp3"
+                    }
+                ]
+            }
+        ],
+        "region": "Central India"
+    },
+    {
+        "price": 0.0185,
+        "instances": [
+            {
+                "typeName": "D4a v4",
+                "cpu": 4,
+                "memory": 16,
+                "storage": 100,
+                "region": "Central India",
+                "os": "CentOS or Ubuntu Linux",
+                "family": "General purpose",
+                "onDemandPrice": 0.123,
+                "spot_price": 0.0123,
+                "discount": 0,
+                "CloudProvider": "Azure",
+                "priceAfterDiscount": 0.0123,
+                "components": [
+                    {
+                        "appName": "App1",
+                        "componentName": "Comp1"
+                    },
+                    {
+                        "appName": "Database",
+                        "componentName": "Comp2"
+                    }
+                ]
+            },
+            {
+                "typeName": "D2a v4",
+                "cpu": 2,
+                "memory": 8,
+                "storage": 50,
+                "region": "Central India",
+                "os": "CentOS or Ubuntu Linux",
+                "family": "General purpose",
+                "onDemandPrice": 0.0622,
+                "spot_price": 0.0062,
+                "discount": 0,
+                "CloudProvider": "Azure",
+                "priceAfterDiscount": 0.0062,
+                "components": [
+                    {
+                        "appName": "Database",
+                        "componentName": "Comp3"
+                    }
+                ]
+            }
+        ],
+        "region": "Central India"
+    },
+    {
+        "price": 0.0185,
+        "instances": [
+            {
+                "typeName": "D2a v4",
+                "cpu": 2,
+                "memory": 8,
+                "storage": 50,
+                "region": "Central India",
+                "os": "CentOS or Ubuntu Linux",
+                "family": "General purpose",
+                "onDemandPrice": 0.0622,
+                "spot_price": 0.0062,
+                "discount": 0,
+                "CloudProvider": "Azure",
+                "priceAfterDiscount": 0.0062,
+                "components": [
+                    {
+                        "appName": "Database",
+                        "componentName": "Comp2"
+                    }
+                ]
+            },
+            {
+                "typeName": "D4a v4",
+                "cpu": 4,
+                "memory": 16,
+                "storage": 100,
+                "region": "Central India",
+                "os": "CentOS or Ubuntu Linux",
+                "family": "General purpose",
+                "onDemandPrice": 0.123,
+                "spot_price": 0.0123,
+                "discount": 0,
+                "CloudProvider": "Azure",
+                "priceAfterDiscount": 0.0123,
+                "components": [
+                    {
+                        "appName": "App1",
+                        "componentName": "Comp1"
+                    },
+                    {
+                        "appName": "Database",
+                        "componentName": "Comp3"
+                    }
+                ]
+            }
+        ],
+        "region": "Central India"
+    },
+    {
+        "price": 0.0186,
+        "instances": [
+            {
+                "typeName": "D2a v4",
+                "cpu": 2,
+                "memory": 8,
+                "storage": 50,
+                "region": "Central India",
+                "os": "CentOS or Ubuntu Linux",
+                "family": "General purpose",
+                "onDemandPrice": 0.0622,
+                "spot_price": 0.0062,
+                "discount": 0,
+                "CloudProvider": "Azure",
+                "priceAfterDiscount": 0.0062,
+                "components": [
+                    {
+                        "appName": "App1",
+                        "componentName": "Comp1"
+                    }
+                ]
+            },
+            {
+                "typeName": "D2a v4",
+                "cpu": 2,
+                "memory": 8,
+                "storage": 50,
+                "region": "Central India",
+                "os": "CentOS or Ubuntu Linux",
+                "family": "General purpose",
+                "onDemandPrice": 0.0622,
+                "spot_price": 0.0062,
+                "discount": 0,
+                "CloudProvider": "Azure",
+                "priceAfterDiscount": 0.0062,
+                "components": [
+                    {
+                        "appName": "Database",
+                        "componentName": "Comp2"
+                    }
+                ]
+            },
+            {
+                "typeName": "D2a v4",
+                "cpu": 2,
+                "memory": 8,
+                "storage": 50,
+                "region": "Central India",
+                "os": "CentOS or Ubuntu Linux",
+                "family": "General purpose",
+                "onDemandPrice": 0.0622,
+                "spot_price": 0.0062,
+                "discount": 0,
+                "CloudProvider": "Azure",
+                "priceAfterDiscount": 0.0062,
+                "components": [
+                    {
+                        "appName": "Database",
+                        "componentName": "Comp3"
+                    }
+                ]
+            }
+        ],
+        "region": "Central India"
+    },
+    {
+        "price": 0.0246,
+        "instances": [
+            {
+                "typeName": "D8a v4",
+                "cpu": 8,
+                "memory": 32,
+                "storage": 200,
+                "region": "Central India",
+                "os": "CentOS or Ubuntu Linux",
+                "family": "General purpose",
+                "onDemandPrice": 0.246,
+                "spot_price": 0.0246,
+                "discount": 0,
+                "CloudProvider": "Azure",
+                "priceAfterDiscount": 0.0246,
+                "components": [
+                    {
+                        "appName": "App1",
+                        "componentName": "Comp1"
+                    },
+                    {
+                        "appName": "Database",
+                        "componentName": "Comp2"
+                    },
+                    {
+                        "appName": "Database",
+                        "componentName": "Comp3"
+                    }
+                ]
+            }
+        ],
+        "region": "Central India"
+    },
+    {
+        "price": 0.027,
+        "instances": [
+            {
+                "typeName": "D2as v5",
+                "cpu": 2,
+                "memory": 8,
+                "storage": 0,
+                "region": "East US",
+                "os": "CentOS or Ubuntu Linux",
+                "family": "General purpose",
+                "onDemandPrice": 0.086,
+                "spot_price": 0.009,
+                "discount": 0,
+                "CloudProvider": "Azure",
+                "priceAfterDiscount": 0.009,
+                "components": [
+                    {
+                        "appName": "App1",
+                        "componentName": "Comp1"
+                    }
+                ]
+            },
+            {
+                "typeName": "D4as v5",
+                "cpu": 4,
+                "memory": 16,
+                "storage": 0,
+                "region": "East US",
+                "os": "CentOS or Ubuntu Linux",
+                "family": "General purpose",
+                "onDemandPrice": 0.172,
+                "spot_price": 0.018,
+                "discount": 0,
+                "CloudProvider": "Azure",
+                "priceAfterDiscount": 0.018,
+                "components": [
+                    {
+                        "appName": "Database",
+                        "componentName": "Comp2"
+                    },
+                    {
+                        "appName": "Database",
+                        "componentName": "Comp3"
+                    }
+                ]
+            }
+        ],
+        "region": "East US"
+    },
+    {
+        "price": 0.027,
+        "instances": [
+            {
+                "typeName": "D4as v5",
+                "cpu": 4,
+                "memory": 16,
+                "storage": 0,
+                "region": "East US",
+                "os": "CentOS or Ubuntu Linux",
+                "family": "General purpose",
+                "onDemandPrice": 0.172,
+                "spot_price": 0.018,
+                "discount": 0,
+                "CloudProvider": "Azure",
+                "priceAfterDiscount": 0.018,
+                "components": [
+                    {
+                        "appName": "App1",
+                        "componentName": "Comp1"
+                    },
+                    {
+                        "appName": "Database",
+                        "componentName": "Comp2"
+                    }
+                ]
+            },
+            {
+                "typeName": "D2as v5",
+                "cpu": 2,
+                "memory": 8,
+                "storage": 0,
+                "region": "East US",
+                "os": "CentOS or Ubuntu Linux",
+                "family": "General purpose",
+                "onDemandPrice": 0.086,
+                "spot_price": 0.009,
+                "discount": 0,
+                "CloudProvider": "Azure",
+                "priceAfterDiscount": 0.009,
+                "components": [
+                    {
+                        "appName": "Database",
+                        "componentName": "Comp3"
+                    }
+                ]
+            }
+        ],
+        "region": "East US"
+    },
+    {
+        "price": 0.027,
+        "instances": [
+            {
+                "typeName": "D2as v5",
+                "cpu": 2,
+                "memory": 8,
+                "storage": 0,
+                "region": "East US",
+                "os": "CentOS or Ubuntu Linux",
+                "family": "General purpose",
+                "onDemandPrice": 0.086,
+                "spot_price": 0.009,
+                "discount": 0,
+                "CloudProvider": "Azure",
+                "priceAfterDiscount": 0.009,
+                "components": [
+                    {
+                        "appName": "Database",
+                        "componentName": "Comp2"
+                    }
+                ]
+            },
+            {
+                "typeName": "D4as v5",
+                "cpu": 4,
+                "memory": 16,
+                "storage": 0,
+                "region": "East US",
+                "os": "CentOS or Ubuntu Linux",
+                "family": "General purpose",
+                "onDemandPrice": 0.172,
+                "spot_price": 0.018,
+                "discount": 0,
+                "CloudProvider": "Azure",
+                "priceAfterDiscount": 0.018,
+                "components": [
+                    {
+                        "appName": "App1",
+                        "componentName": "Comp1"
+                    },
+                    {
+                        "appName": "Database",
+                        "componentName": "Comp3"
+                    }
+                ]
+            }
+        ],
+        "region": "East US"
+    },
+    {
+        "price": 0.027,
+        "instances": [
+            {
+                "typeName": "D2as v5",
+                "cpu": 2,
+                "memory": 8,
+                "storage": 0,
+                "region": "East US",
+                "os": "CentOS or Ubuntu Linux",
+                "family": "General purpose",
+                "onDemandPrice": 0.086,
+                "spot_price": 0.009,
+                "discount": 0,
+                "CloudProvider": "Azure",
+                "priceAfterDiscount": 0.009,
+                "components": [
+                    {
+                        "appName": "App1",
+                        "componentName": "Comp1"
+                    }
+                ]
+            },
+            {
+                "typeName": "D2as v5",
+                "cpu": 2,
+                "memory": 8,
+                "storage": 0,
+                "region": "East US",
+                "os": "CentOS or Ubuntu Linux",
+                "family": "General purpose",
+                "onDemandPrice": 0.086,
+                "spot_price": 0.009,
+                "discount": 0,
+                "CloudProvider": "Azure",
+                "priceAfterDiscount": 0.009,
+                "components": [
+                    {
+                        "appName": "Database",
+                        "componentName": "Comp2"
+                    }
+                ]
+            },
+            {
+                "typeName": "D2as v5",
+                "cpu": 2,
+                "memory": 8,
+                "storage": 0,
+                "region": "East US",
+                "os": "CentOS or Ubuntu Linux",
+                "family": "General purpose",
+                "onDemandPrice": 0.086,
+                "spot_price": 0.009,
+                "discount": 0,
+                "CloudProvider": "Azure",
+                "priceAfterDiscount": 0.009,
+                "components": [
+                    {
+                        "appName": "Database",
+                        "componentName": "Comp3"
+                    }
+                ]
+            }
+        ],
+        "region": "East US"
+    },
+    {
+        "price": 0.027,
+        "instances": [
+            {
+                "typeName": "D2as v5",
+                "cpu": 2,
+                "memory": 8,
+                "storage": 0,
+                "region": "East US 2",
+                "os": "Red Hat Enterprise Linux",
+                "family": "General purpose",
+                "onDemandPrice": 0.086,
+                "spot_price": 0.009,
+                "discount": 0,
+                "CloudProvider": "Azure",
+                "priceAfterDiscount": 0.009,
+                "components": [
+                    {
+                        "appName": "App1",
+                        "componentName": "Comp1"
+                    }
+                ]
+            },
+            {
+                "typeName": "D4as v5",
+                "cpu": 4,
+                "memory": 16,
+                "storage": 0,
+                "region": "East US 2",
+                "os": "Red Hat Enterprise Linux",
+                "family": "General purpose",
+                "onDemandPrice": 0.172,
+                "spot_price": 0.018,
+                "discount": 0,
+                "CloudProvider": "Azure",
+                "priceAfterDiscount": 0.018,
+                "components": [
+                    {
+                        "appName": "Database",
+                        "componentName": "Comp2"
+                    },
+                    {
+                        "appName": "Database",
+                        "componentName": "Comp3"
+                    }
+                ]
+            }
+        ],
+        "region": "East US 2"
+    },
+    {
+        "price": 0.027,
+        "instances": [
+            {
+                "typeName": "D4as v5",
+                "cpu": 4,
+                "memory": 16,
+                "storage": 0,
+                "region": "East US 2",
+                "os": "Red Hat Enterprise Linux",
+                "family": "General purpose",
+                "onDemandPrice": 0.172,
+                "spot_price": 0.018,
+                "discount": 0,
+                "CloudProvider": "Azure",
+                "priceAfterDiscount": 0.018,
+                "components": [
+                    {
+                        "appName": "App1",
+                        "componentName": "Comp1"
+                    },
+                    {
+                        "appName": "Database",
+                        "componentName": "Comp2"
+                    }
+                ]
+            },
+            {
+                "typeName": "D2as v5",
+                "cpu": 2,
+                "memory": 8,
+                "storage": 0,
+                "region": "East US 2",
+                "os": "Red Hat Enterprise Linux",
+                "family": "General purpose",
+                "onDemandPrice": 0.086,
+                "spot_price": 0.009,
+                "discount": 0,
+                "CloudProvider": "Azure",
+                "priceAfterDiscount": 0.009,
+                "components": [
+                    {
+                        "appName": "Database",
+                        "componentName": "Comp3"
+                    }
+                ]
+            }
+        ],
+        "region": "East US 2"
+    },
+    {
+        "price": 0.027,
+        "instances": [
+            {
+                "typeName": "D2as v5",
+                "cpu": 2,
+                "memory": 8,
+                "storage": 0,
+                "region": "East US 2",
+                "os": "Red Hat Enterprise Linux",
+                "family": "General purpose",
+                "onDemandPrice": 0.086,
+                "spot_price": 0.009,
+                "discount": 0,
+                "CloudProvider": "Azure",
+                "priceAfterDiscount": 0.009,
+                "components": [
+                    {
+                        "appName": "Database",
+                        "componentName": "Comp2"
+                    }
+                ]
+            },
+            {
+                "typeName": "D4as v5",
+                "cpu": 4,
+                "memory": 16,
+                "storage": 0,
+                "region": "East US 2",
+                "os": "Red Hat Enterprise Linux",
+                "family": "General purpose",
+                "onDemandPrice": 0.172,
+                "spot_price": 0.018,
+                "discount": 0,
+                "CloudProvider": "Azure",
+                "priceAfterDiscount": 0.018,
+                "components": [
+                    {
+                        "appName": "App1",
+                        "componentName": "Comp1"
+                    },
+                    {
+                        "appName": "Database",
+                        "componentName": "Comp3"
+                    }
+                ]
+            }
+        ],
+        "region": "East US 2"
+    },
+    {
+        "price": 0.027,
+        "instances": [
+            {
+                "typeName": "D2as v5",
+                "cpu": 2,
+                "memory": 8,
+                "storage": 0,
+                "region": "East US 2",
+                "os": "Red Hat Enterprise Linux",
+                "family": "General purpose",
+                "onDemandPrice": 0.086,
+                "spot_price": 0.009,
+                "discount": 0,
+                "CloudProvider": "Azure",
+                "priceAfterDiscount": 0.009,
+                "components": [
+                    {
+                        "appName": "App1",
+                        "componentName": "Comp1"
+                    }
+                ]
+            },
+            {
+                "typeName": "D2as v5",
+                "cpu": 2,
+                "memory": 8,
+                "storage": 0,
+                "region": "East US 2",
+                "os": "Red Hat Enterprise Linux",
+                "family": "General purpose",
+                "onDemandPrice": 0.086,
+                "spot_price": 0.009,
+                "discount": 0,
+                "CloudProvider": "Azure",
+                "priceAfterDiscount": 0.009,
+                "components": [
+                    {
+                        "appName": "Database",
+                        "componentName": "Comp2"
+                    }
+                ]
+            },
+            {
+                "typeName": "D2as v5",
+                "cpu": 2,
+                "memory": 8,
+                "storage": 0,
+                "region": "East US 2",
+                "os": "Red Hat Enterprise Linux",
+                "family": "General purpose",
+                "onDemandPrice": 0.086,
+                "spot_price": 0.009,
+                "discount": 0,
+                "CloudProvider": "Azure",
+                "priceAfterDiscount": 0.009,
+                "components": [
+                    {
+                        "appName": "Database",
+                        "componentName": "Comp3"
+                    }
+                ]
+            }
+        ],
+        "region": "East US 2"
+    },
+    {
+        "price": 0.0288,
+        "instances": [
+            {
+                "typeName": "D2a v4",
+                "cpu": 2,
+                "memory": 8,
+                "storage": 50,
+                "region": "North Central US",
+                "os": "CentOS or Ubuntu Linux",
+                "family": "General purpose",
+                "onDemandPrice": 0.096,
+                "spot_price": 0.0096,
+                "discount": 0,
+                "CloudProvider": "Azure",
+                "priceAfterDiscount": 0.0096,
+                "components": [
+                    {
+                        "appName": "App1",
+                        "componentName": "Comp1"
+                    }
+                ]
+            },
+            {
+                "typeName": "D4a v4",
+                "cpu": 4,
+                "memory": 16,
+                "storage": 100,
+                "region": "North Central US",
+                "os": "CentOS or Ubuntu Linux",
+                "family": "General purpose",
+                "onDemandPrice": 0.192,
+                "spot_price": 0.0192,
+                "discount": 0,
+                "CloudProvider": "Azure",
+                "priceAfterDiscount": 0.0192,
+                "components": [
+                    {
+                        "appName": "Database",
+                        "componentName": "Comp2"
+                    },
+                    {
+                        "appName": "Database",
+                        "componentName": "Comp3"
+                    }
+                ]
+            }
+        ],
+        "region": "North Central US"
+    },
+    {
+        "price": 0.0288,
+        "instances": [
+            {
+                "typeName": "D4a v4",
+                "cpu": 4,
+                "memory": 16,
+                "storage": 100,
+                "region": "North Central US",
+                "os": "CentOS or Ubuntu Linux",
+                "family": "General purpose",
+                "onDemandPrice": 0.192,
+                "spot_price": 0.0192,
+                "discount": 0,
+                "CloudProvider": "Azure",
+                "priceAfterDiscount": 0.0192,
+                "components": [
+                    {
+                        "appName": "App1",
+                        "componentName": "Comp1"
+                    },
+                    {
+                        "appName": "Database",
+                        "componentName": "Comp2"
+                    }
+                ]
+            },
+            {
+                "typeName": "D2a v4",
+                "cpu": 2,
+                "memory": 8,
+                "storage": 50,
+                "region": "North Central US",
+                "os": "CentOS or Ubuntu Linux",
+                "family": "General purpose",
+                "onDemandPrice": 0.096,
+                "spot_price": 0.0096,
+                "discount": 0,
+                "CloudProvider": "Azure",
+                "priceAfterDiscount": 0.0096,
+                "components": [
+                    {
+                        "appName": "Database",
+                        "componentName": "Comp3"
+                    }
+                ]
+            }
+        ],
+        "region": "North Central US"
+    },
+    {
+        "price": 0.0288,
+        "instances": [
+            {
+                "typeName": "D2a v4",
+                "cpu": 2,
+                "memory": 8,
+                "storage": 50,
+                "region": "North Central US",
+                "os": "CentOS or Ubuntu Linux",
+                "family": "General purpose",
+                "onDemandPrice": 0.096,
+                "spot_price": 0.0096,
+                "discount": 0,
+                "CloudProvider": "Azure",
+                "priceAfterDiscount": 0.0096,
+                "components": [
+                    {
+                        "appName": "Database",
+                        "componentName": "Comp2"
+                    }
+                ]
+            },
+            {
+                "typeName": "D4a v4",
+                "cpu": 4,
+                "memory": 16,
+                "storage": 100,
+                "region": "North Central US",
+                "os": "CentOS or Ubuntu Linux",
+                "family": "General purpose",
+                "onDemandPrice": 0.192,
+                "spot_price": 0.0192,
+                "discount": 0,
+                "CloudProvider": "Azure",
+                "priceAfterDiscount": 0.0192,
+                "components": [
+                    {
+                        "appName": "App1",
+                        "componentName": "Comp1"
+                    },
+                    {
+                        "appName": "Database",
+                        "componentName": "Comp3"
+                    }
+                ]
+            }
+        ],
+        "region": "North Central US"
+    },
+    {
+        "price": 0.0288,
+        "instances": [
+            {
+                "typeName": "D2a v4",
+                "cpu": 2,
+                "memory": 8,
+                "storage": 50,
+                "region": "North Central US",
+                "os": "CentOS or Ubuntu Linux",
+                "family": "General purpose",
+                "onDemandPrice": 0.096,
+                "spot_price": 0.0096,
+                "discount": 0,
+                "CloudProvider": "Azure",
+                "priceAfterDiscount": 0.0096,
+                "components": [
+                    {
+                        "appName": "App1",
+                        "componentName": "Comp1"
+                    }
+                ]
+            },
+            {
+                "typeName": "D2a v4",
+                "cpu": 2,
+                "memory": 8,
+                "storage": 50,
+                "region": "North Central US",
+                "os": "CentOS or Ubuntu Linux",
+                "family": "General purpose",
+                "onDemandPrice": 0.096,
+                "spot_price": 0.0096,
+                "discount": 0,
+                "CloudProvider": "Azure",
+                "priceAfterDiscount": 0.0096,
+                "components": [
+                    {
+                        "appName": "Database",
+                        "componentName": "Comp2"
+                    }
+                ]
+            },
+            {
+                "typeName": "D2a v4",
+                "cpu": 2,
+                "memory": 8,
+                "storage": 50,
+                "region": "North Central US",
+                "os": "CentOS or Ubuntu Linux",
+                "family": "General purpose",
+                "onDemandPrice": 0.096,
+                "spot_price": 0.0096,
+                "discount": 0,
+                "CloudProvider": "Azure",
+                "priceAfterDiscount": 0.0096,
+                "components": [
+                    {
+                        "appName": "Database",
+                        "componentName": "Comp3"
+                    }
+                ]
+            }
+        ],
+        "region": "North Central US"
+    },
+    {
+        "price": 0.0288,
+        "instances": [
+            {
+                "typeName": "D2a v4",
+                "cpu": 2,
+                "memory": 8,
+                "storage": 50,
+                "region": "West US 2",
+                "os": "CentOS or Ubuntu Linux",
+                "family": "General purpose",
+                "onDemandPrice": 0.096,
+                "spot_price": 0.0096,
+                "discount": 0,
+                "CloudProvider": "Azure",
+                "priceAfterDiscount": 0.0096,
+                "components": [
+                    {
+                        "appName": "App1",
+                        "componentName": "Comp1"
+                    }
+                ]
+            },
+            {
+                "typeName": "D4a v4",
+                "cpu": 4,
+                "memory": 16,
+                "storage": 100,
+                "region": "West US 2",
+                "os": "CentOS or Ubuntu Linux",
+                "family": "General purpose",
+                "onDemandPrice": 0.192,
+                "spot_price": 0.0192,
+                "discount": 0,
+                "CloudProvider": "Azure",
+                "priceAfterDiscount": 0.0192,
+                "components": [
+                    {
+                        "appName": "Database",
+                        "componentName": "Comp2"
+                    },
+                    {
+                        "appName": "Database",
+                        "componentName": "Comp3"
+                    }
+                ]
+            }
+        ],
+        "region": "West US 2"
+    },
+    {
+        "price": 0.0288,
+        "instances": [
+            {
+                "typeName": "D4a v4",
+                "cpu": 4,
+                "memory": 16,
+                "storage": 100,
+                "region": "West US 2",
+                "os": "CentOS or Ubuntu Linux",
+                "family": "General purpose",
+                "onDemandPrice": 0.192,
+                "spot_price": 0.0192,
+                "discount": 0,
+                "CloudProvider": "Azure",
+                "priceAfterDiscount": 0.0192,
+                "components": [
+                    {
+                        "appName": "App1",
+                        "componentName": "Comp1"
+                    },
+                    {
+                        "appName": "Database",
+                        "componentName": "Comp2"
+                    }
+                ]
+            },
+            {
+                "typeName": "D2a v4",
+                "cpu": 2,
+                "memory": 8,
+                "storage": 50,
+                "region": "West US 2",
+                "os": "CentOS or Ubuntu Linux",
+                "family": "General purpose",
+                "onDemandPrice": 0.096,
+                "spot_price": 0.0096,
+                "discount": 0,
+                "CloudProvider": "Azure",
+                "priceAfterDiscount": 0.0096,
+                "components": [
+                    {
+                        "appName": "Database",
+                        "componentName": "Comp3"
+                    }
+                ]
+            }
+        ],
+        "region": "West US 2"
+    },
+    {
+        "price": 0.0288,
+        "instances": [
+            {
+                "typeName": "D2a v4",
+                "cpu": 2,
+                "memory": 8,
+                "storage": 50,
+                "region": "West US 2",
+                "os": "CentOS or Ubuntu Linux",
+                "family": "General purpose",
+                "onDemandPrice": 0.096,
+                "spot_price": 0.0096,
+                "discount": 0,
+                "CloudProvider": "Azure",
+                "priceAfterDiscount": 0.0096,
+                "components": [
+                    {
+                        "appName": "Database",
+                        "componentName": "Comp2"
+                    }
+                ]
+            },
+            {
+                "typeName": "D4a v4",
+                "cpu": 4,
+                "memory": 16,
+                "storage": 100,
+                "region": "West US 2",
+                "os": "CentOS or Ubuntu Linux",
+                "family": "General purpose",
+                "onDemandPrice": 0.192,
+                "spot_price": 0.0192,
+                "discount": 0,
+                "CloudProvider": "Azure",
+                "priceAfterDiscount": 0.0192,
+                "components": [
+                    {
+                        "appName": "App1",
+                        "componentName": "Comp1"
+                    },
+                    {
+                        "appName": "Database",
+                        "componentName": "Comp3"
+                    }
+                ]
+            }
+        ],
+        "region": "West US 2"
+    }
+]
